@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">File upload in ASP.NET Core MVC</div>
+        <div class="panel-body">
+            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="col-md-2">
+                            Choose Files
+                        </div>
+                        <div class="col-md-6">
+                            <input type="file" name="postedFiles" class="form-control" multiple />
+                        </div>
+                        <div class="col-md-2 mt-2">
+
+                        </div>
+                        <div class="col-md-6 mt-4 text-center">
+                            <input type="submit" value="Upload" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="col-sm-9">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Image Name</th>
+                                        <th>Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (@ViewBag.Message as string).Split(','))
+                                    {
+                                        if (!string.IsNullOrEmpty(item))
+                                        {
+                                            <tr>
+                                                <td>@item</td>
+                                                <td><img src="/uploads/@item" title="@item" width="50" height="50" /></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
